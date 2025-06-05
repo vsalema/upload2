@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>TVradioZap tools: Watch full screen live TV, videos, or play any radio, audio. Hls m3u8, Dailymotion, Youtube, Vimeo, Twitch, mp4, mp3, aac, ogg, flac... Regardez les TV et vidéos plein écran ou écouter radios et audio </title>
+
+	<link rel="stylesheet" type="text/css" href="https://tvradiozap.eu/css/tvrz52.css" />	
+	<style>
+		body {padding-left:15px;}
+		a {text-decoration: none;margin:20px;}
+		input {color:green;margin-right:10px;margin-top:5px; height:1.8em;width:96%;}
+	</style>
+
+	
+</head>
+
+<body style="white-space: pre-line;">
+	
+  <div style="margin-top: 0px;">
+  
+  <div style="display:inline-block;"><a href="/"><img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_3757108f3f3cd29b.png" alt="logo, page d'accueil" style="max-width: 248px; max-height: 248px;margin-top: 0px;"></a></div><div style="display:inline-block;font-weight:bold;width:60%;"><span style="display:inline-block;font-size:larger;transform:translateY(-45px);">Tools</span>
+	</div>
+
+	
+	<img src="https://tvradiozap.eu/tools/im/flag-uk.gif" /> Watch full screen live TV, videos, or play any radio, audio.
+	<img src="https://tvradiozap.eu/tools/im/flag-fr.gif" /><span lang="fr"> Regardez les TV et vidéos plein écran ou écouter radios et audio.</span>
+
+
+	 Play Hls m3u8, Dash mpd, Dailymotion, Youtube, Vimeo, Twitch, mp4, mp3, flac, aac, ogg...
+
+
+	Entrez simplement le lien audio/vidéo ci-dessous et appuyez sur la touche <span class="boutonlike" style="white-space:nowrap;"> Enter ⏎ </span>  ou cliquez sur <span class="bouton" style="white-space:nowrap;color:white;" onclick="play()">Play</span>.
+	<input name="v" minlength="5" maxlength="2000" type="text" autofocus required
+		placeholder="Examples https://streamtv.cdn.dvmr.fr/TVR/ngrp:tvr.stream_all/master.m3u8 or https://vimeo.com/284319264" 
+		value="" />
+
+	<span style="color:red"><?php echo $_GET['err'] ?></span>
+	
+  <iframe src="https://vsalema.github.io/play3/" width="880" height="700" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen scrolling="no"></iframe>
+  
+  </div>
+</body>
+
+<script>
+	var el = document.getElementsByName('v')[0];
+	el.addEventListener("keypress", goPlay, false);
+	function goPlay(e){
+		if (e.keyCode === 13)
+			play();
+	}
+	
+	//initialiser le champ d'input avec l'éventuelle url en query
+	var url = decodeURIComponent(window.location.search.substring(1));	//retourne la query sans "?"
+	url = url.replace(/%20/g, " ");		//NB decodeURI ne touche pas aux espaces
+	el.value=url;						//query de l'url mise dans l'input
+
+function play() {
+
+	//l'historique est conservé mais la page non rechargée car seul la query change
+	history.pushState( {}, null, '/tools/joue.html?'+(url = decodeURIComponent(el.value)) );
+	
+	if (url.substring(0,5)==='https')
+		window.open(decodeURIComponent('https://vsalema.github.io/play3/?'+url),'ecoute');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
+	else
+		window.open(decodeURIComponent('https://vsalema.github.io/play3/?'+url),'ecoute');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
+	return false;
+}
+
+</script>
+
+</html>
+
