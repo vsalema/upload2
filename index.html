@@ -146,9 +146,9 @@ function play() {
 	history.pushState( {}, null, '/tools/joue.html?'+(url = decodeURIComponent(el.value)) );
 	
 	if (url.substring(0,5)==='https')
-		window.open(decodeURIComponent('https://vsalema.github.io/play3/?'+url),'ecoute');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
+		window.open(decodeURIComponent('https://vsalema.github.io/upload2/?'+url),'ecoute');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
 	else
-		window.open(decodeURIComponent('https://vsalema.github.io/play3/?'+url),'ecoute');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
+		window.open(decodeURIComponent('https://vsalema.github.io/upload2/?'+url),'ecoute');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
 	return false;
 }
 
